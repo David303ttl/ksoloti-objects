@@ -1,5 +1,5 @@
 <objdefs appVersion="1.0.12">
-   <obj.normal id="display_test_ssh1107" uuid="0c083e83-0280-4cf2-b747-8a00859bb905">
+   <obj.normal id="display_test_ssh1107" uuid="e27814a0-3a5c-4781-a33f-64765e8bfe1c">
       <sDescription>Interfaces with the OLED display on Ksoloti Gills.
 Note that you do NOT need to place a gpio/i2c/config object in your patch anymore for this object to function.
 TEMPORARY TEST OBJECT FOR SH1107 CONTROLLER!</sDescription>
