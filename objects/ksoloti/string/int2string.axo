@@ -1,4 +1,4 @@
-<objdefs appVersion="1.0.12">
+<objdefs appVersion="1.1.0">
    <obj.normal id="int2string" uuid="681351bf-ba17-4cda-98c2-44fb3c62db1b">
       <sDescription>Convert a bipolar integer (green) value to a string.
 
@@ -12,10 +12,10 @@ If you&apos;re expecting negative values, keep in mind that the &quot;-&quot; wi
       <license>GPLv3</license>
       <helpPatch>int2string_float2string.axh</helpPatch>
       <inlets>
-         <int32.bipolar name="in" description="integer input"/>
+         <int32.bipolar name="in" description="integer input" noLabel="true"/>
       </inlets>
       <outlets>
-         <charptr32 name="str" description="string output"/>
+         <charptr32 name="str" description="string output" noLabel="true"/>
       </outlets>
       <displays/>
       <params/>
@@ -33,7 +33,7 @@ If you&apos;re expecting negative values, keep in mind that the &quot;-&quot; wi
          </combo>
       </attribs>
       <includes>
-         <include>chibios/os/various/chprintf.h</include>
+         <include>chibios/os/hal/lib/streams/chprintf.h</include>
       </includes>
       <code.declaration><![CDATA[char c[attr_digits]; /* digits + null terminator */]]></code.declaration>
       <code.init><![CDATA[int i; for (i = 0; i < attr_digits; i++) {

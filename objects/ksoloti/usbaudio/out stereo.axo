@@ -1,0 +1,60 @@
+<objdefs appVersion="1.1.0">
+   <obj.normal id="out stereo" uuid="f39f2910bf8342d18afd9b09bcf110c9">
+      <sDescription>USB audio output, stereo.
+Requires &quot;+ USBAudio&quot; firmware mode (set in Preferences) or the patch will throw an error!
+      </sDescription>
+      <author>Andrew Capon</author>
+      <license>BSD</license>
+	  <helpPatch>usbaudio.axh</helpPatch>
+      <inlets>
+         <frac32buffer name="left" description="Left channel"/>
+         <frac32buffer name="right" description="Right channel"/>
+      </inlets>
+      <outlets/>
+      <displays>
+         <frac32.vu name="vuLeft"/>
+         <frac32.vu name="vuRight"/>
+      </displays>
+      <params/>
+      <attribs>
+         <combo name="channelPair">
+            <MenuEntries>
+               <string>1/2</string>
+               <string>3/4</string>
+            </MenuEntries>
+            <CEntries>
+               <string>1</string>
+               <string>2</string>
+            </CEntries>
+         </combo>
+      </attribs>
+      <code.krate><![CDATA[
+#if FW_USBAUDIO      
+   int j;
+
+   int32_t *destL = nullptr;
+   int32_t *destR = nullptr;
+
+   switch(attr_channelPair) {
+      case 1 : destL = UsbOutputLeft; destR = UsbOutputRight; break;
+   #if USB_AUDIO_CHANNELS == 4
+      case 2 : destL = UsbOutput2Left; destR = UsbOutput2Right; break;
+   #endif
+   }
+
+   if(destL and destR) {
+      for(j=0;j<BUFSIZE;j++){
+         destL[j] += __SSAT(inlet_left[j],28);
+         destR[j] += __SSAT(inlet_right[j],28);
+      }
+   }
+#elif !defined(FW_USBAUDIO_WARNED)
+   #define FW_USBAUDIO_WARNED
+   #warning "This patch contains USBAudio objects, but the device is not running USBAudio firmware! The objects in question have been muted."
+#endif // FW_USBAUDIO
+
+disp_vuLeft=inlet_left[0];
+disp_vuRight=inlet_right[0];
+]]></code.krate>
+   </obj.normal>
+</objdefs>

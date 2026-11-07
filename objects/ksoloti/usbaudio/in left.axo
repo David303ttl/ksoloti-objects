@@ -1,0 +1,36 @@
+<objdefs appVersion="1.1.0">
+   <obj.normal id="in left" uuid="08b6d401deab4b949f47ce54cee6d79b">
+      <sDescription>USB audio input, left channel (or mono).
+Requires &quot;+ USBAudio&quot; firmware mode (set in Preferences) or the patch will throw an error!
+      </sDescription>
+      <author>Andrew Capon</author>
+      <license>BSD</license>
+	   <helpPatch>usbaudio.axh</helpPatch>
+      <inlets/>
+      <outlets>
+         <frac32buffer name="wave" description="Left channel" noLabel="true"/>
+      </outlets>
+      <displays>
+         <frac32.vu name="vu" noLabel="true"/>
+      </displays>
+      <params/>
+      <attribs/>
+      <code.krate><![CDATA[
+int j;
+for (j=0; j<BUFSIZE; j++) {
+#if FW_USBAUDIO
+	outlet_wave[j] = UsbInputLeft[j];
+#else
+	outlet_wave[j] = 0;
+#endif
+}
+
+#if !defined(FW_USBAUDIO) && !defined(FW_USBAUDIO_WARNED)
+#define FW_USBAUDIO_WARNED
+#warning "This patch contains USBAudio objects, but the device is not running USBAudio firmware! The objects in question have been muted."
+#endif
+
+disp_vu = outlet_wave[0];
+]]></code.krate>
+   </obj.normal>
+</objdefs>

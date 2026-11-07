@@ -20,11 +20,11 @@
       <helpPatch>ctrl.axh</helpPatch>
       <inlets/>
       <outlets>
-        <int32.positive name="out" description="output"/>
+        <int32.positive name="out" description="output" noLabel="true"/>
       </outlets>
       <displays/>
       <params>
-        <int32.vradio name="value">
+        <int32.vradio name="value" noLabel="true">
           <MaxValue i="11"/>
         </int32.vradio>
       </params>
@@ -38,7 +38,7 @@
   <patcher type="patch/patcher" uuid="5c18c8d7-0bb6-44be-ad24-a0bc2d17c9aa" name="cv out helper" x="294" y="784">
     <params/>
     <attribs/>
-    <subpatch appVersion="1.0.12">
+    <subpatch appVersion="1.1.0">
       <obj type="patch/inlet i" uuid="f11927f00c59219df0c50f73056aa19f125540b7" name="volt" x="70" y="154">
         <params/>
         <attribs/>
@@ -54,7 +54,7 @@
       <patcher type="patch/patcher" uuid="3f781e41-a2bc-4af3-bb45-8c2fd50da94f" name="cv handler" x="308" y="154">
         <params/>
         <attribs/>
-        <subpatch appVersion="1.0.12">
+        <subpatch appVersion="1.1.0">
           <obj type="patch/inlet i" uuid="f11927f00c59219df0c50f73056aa19f125540b7" name="index" x="266" y="140">
             <params/>
             <attribs/>
@@ -67,10 +67,10 @@
               <license>BSD</license>
               <helpPatch>mux.axh</helpPatch>
               <inlets>
-                <int32.positive name="in" description="select"/>
+                <int32.positive name="in" description="select" noLabel="true"/>
               </inlets>
               <outlets>
-                <frac32 name="out" description="output"/>
+                <frac32 name="out" description="output" noLabel="true"/>
               </outlets>
               <displays/>
               <params/>
@@ -121,7 +121,7 @@ outlet_out = (val * 12)<<21;]]></code.krate>
       <patcher type="patch/patcher" uuid="64b25ff0-e7d2-4e85-87f6-60a3add7a48e" name="oled stuff" x="308" y="252">
         <params/>
         <attribs/>
-        <subpatch appVersion="1.0.12">
+        <subpatch appVersion="1.1.0">
           <obj type="gpio/i2c/config" uuid="b095a33e56de5fcd23740a7d983bc0bafb315d81" name="config_1" x="308" y="0">
             <params/>
             <attribs/>

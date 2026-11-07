@@ -1,0 +1,23 @@
+<objdefs appVersion="1.1.0">
+   <obj.normal id="Usb Audio Resample" uuid="775d31565016417c9f8ff8d8257fa641">
+      <sDescription>Usb Audio Resampling Switch.</sDescription>
+      <author>Andrew Capon</author>
+      <license>BSD</license>
+      <helpPatch></helpPatch>
+      <inlets/>
+      <outlets/>
+      <displays/>
+      <params>
+         <bool32.tgl name="Resample"/>
+      </params>
+      <attribs/>
+      <code.krate><![CDATA[#if FW_USBAUDIO
+usbAudioResample = param_Resample;
+#endif
+
+#if !defined(FW_USBAUDIO) && !defined(FW_USBAUDIO_WARNED)
+#define FW_USBAUDIO_WARNED
+#warning "This patch contains USBAudio objects, but the device is not running USBAudio firmware! The objects in question have been muted."
+#endif]]></code.krate>
+   </obj.normal>
+</objdefs>

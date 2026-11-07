@@ -1,0 +1,74 @@
+<objdefs appVersion="1.1.0">
+   <obj.normal id="in stereo" uuid="97497df749dd47a19a18f4a78ebc58e6">
+      <sDescription>USB audio input, stereo.
+Requires &quot;+ USBAudio&quot; firmware mode (set in Preferences) or the patch will throw an error!
+      </sDescription>
+      <author>Andrew Capon</author>
+      <license>BSD</license>
+	  <helpPatch>usbaudio.axh</helpPatch>
+      <inlets/>
+      <outlets>
+         <frac32buffer name="left" description="Left channel"/>
+         <frac32buffer name="right" description="Right channel"/>
+      </outlets>
+      <displays>
+         <frac32.vu name="vuLeft"/>
+         <frac32.vu name="vuRight"/>
+      </displays>
+      <params/>
+      <attribs>
+         <combo name="channelPair">
+            <MenuEntries>
+               <string>1/2</string>
+               <string>3/4</string>
+            </MenuEntries>
+            <CEntries>
+               <string>1</string>
+               <string>2</string>
+            </CEntries>
+         </combo>
+      </attribs>
+      <code.krate><![CDATA[
+int j;
+#if FW_USBAUDIO
+   int32_t *sourceL = nullptr;
+   int32_t *sourceR = nullptr;
+
+   switch(attr_channelPair) {
+      case 1 : sourceL = UsbInputLeft; sourceR = UsbInputRight; break;
+   #if USB_AUDIO_CHANNELS == 4
+      case 2 : sourceL = UsbInput2Left; sourceR = UsbInput2Right; break;
+   #endif // USB_AUDIO_CHANNELS
+   }
+
+   if(sourceL && sourceR) {
+      for(j=0;j<BUFSIZE;j++){
+         outlet_left[j] = sourceL[j];
+         outlet_right[j] = sourceR[j];
+      }
+   }
+   else {
+      for(j=0;j<BUFSIZE;j++){
+         outlet_left[j]  = 0;
+         outlet_right[j] = 0;
+      }
+   }
+
+   disp_vuLeft=outlet_left[0];
+   disp_vuRight=outlet_right[0];
+#else
+   for(j=0;j<BUFSIZE;j++){
+      outlet_left[j]  = 0;
+      outlet_right[j] = 0;
+   }
+   #if !defined(FW_USBAUDIO_WARNED)
+      #define FW_USBAUDIO_WARNED
+      #warning "This patch contains USBAudio objects, but the device is not running USBAudio firmware! The objects in question have been muted."
+   #endif // FW_USBAUDIO_WARNED
+#endif // FW_USBAUDIO
+
+disp_vuLeft=outlet_left[0];
+disp_vuRight=outlet_right[0];
+]]></code.krate>
+   </obj.normal>
+</objdefs>

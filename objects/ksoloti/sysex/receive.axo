@@ -5,10 +5,10 @@
       <license>BSD</license>
       <inlets/>
       <outlets>
-         <bool32 name="hasMessage" description="Sends a trigger when a valid message has been received."/>
+         <bool32 name="hasMessage" description="Sends a trigger when a valid message has been received." noLabel="true"/>
       </outlets>
       <displays>
-         <bool32 name="listening" description="A sysex start message (F0) has been detected - waiting for end message (F7). Will time out after a few seconds if no end message is received."/>
+         <bool32 name="listening" description="A sysex start message (F0) has been detected - waiting for end message (F7). Will time out after a few seconds."/>
          <bool32 name="success" description="Lights up when a proper sysex string has been sucessfully received."/>
          <bool32 name="error" description="&lt;html&gt;Lights up when either of the below happens:&lt;br&gt;- a malformed sysex string was received&lt;br&gt;- a sysex transmission timed out/was aborted&lt;br&gt;- the currently selected buffer maxlength is too small for the most recent message."/>
          <int32.label name="length" description="Shows the length of the most recent successfully received sysex string."/>

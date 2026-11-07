@@ -1,0 +1,30 @@
+<objdefs appVersion="1.1.0">
+   <obj.normal id="out right" uuid="359a6d16d33b4d29a8060b6151eff149">
+      <sDescription>USB audio output, right channel.
+Requires &quot;+ USBAudio&quot; firmware mode (set in Preferences) or the patch will throw an error!
+      </sDescription>
+      <author>Andrew Capon</author>
+      <license>BSD</license>
+	  <helpPatch>usbaudio.axh</helpPatch>
+      <inlets>
+         <frac32buffer name="wave" description="Right channel" noLabel="true"/>
+      </inlets>
+      <outlets/>
+      <displays>
+         <frac32.vu name="vu" noLabel="true"/>
+      </displays>
+      <params/>
+      <attribs/>
+      <code.krate><![CDATA[#if FW_USBAUDIO
+int j;
+for (j=0; j<BUFSIZE; j++) {
+	UsbOutputRight[j] += __SSAT(inlet_wave[j], 28);
+}
+#elif !defined(FW_USBAUDIO_WARNED)
+#define FW_USBAUDIO_WARNED
+#warning "This patch contains USBAudio objects, but the device is not running USBAudio firmware! The objects in question have been muted."
+#endif
+disp_vu = inlet_wave[0];
+]]></code.krate>
+   </obj.normal>
+</objdefs>
