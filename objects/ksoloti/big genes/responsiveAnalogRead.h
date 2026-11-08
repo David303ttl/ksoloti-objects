@@ -87,7 +87,7 @@ class ResponsiveAnalogRead {
 	int32_t smoothValue = 0;
 	int32_t errorEMA = 0;
 
-	bool_t isSleeping = false;
+	bool isSleeping = false;
 };
 
 #endif

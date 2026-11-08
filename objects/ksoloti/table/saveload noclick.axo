@@ -31,7 +31,7 @@ The object has a &quot;busy&quot; light, giving feedback if loading or writing h
 const char* fname;
 
 __attribute__((noinline)) msg_t ThreadNoClick2() {
-	while (!chThdShouldTerminate()) {
+	while (!chThdShouldTerminateX()) {
 		if (trig_save && !ntrig) {
 			ntrig = 1;
 			save_sd(fname, attr_table.array, attr_table.LENGTH);
@@ -66,8 +66,8 @@ static msg_t ThreadNoClick(void *arg) {
 }
 
 
-WORKING_AREA(waThreadNoClick, 1024); /* 750 is not enough, try 1024 or more */
-Thread *Thd;]]></code.declaration>
+THD_WORKING_AREA(waThreadNoClick, 1024); /* 750 is not enough, try 1024 or more */
+thread_t *Thd;]]></code.declaration>
       <code.init><![CDATA[trig_load = trig_save = ntrig = 0;
 
 Thd = chThdCreateStatic(waThreadNoClick, sizeof(waThreadNoClick), LOWPRIO, (tfunc_t)ThreadNoClick, (void *)this);]]></code.init>

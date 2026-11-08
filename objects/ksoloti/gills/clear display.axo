@@ -39,14 +39,14 @@ static msg_t ThreadX(void *arg) {
 	((attr_parent *)arg)->ThreadX2();
 }
 
-WORKING_AREA(waThreadX, 32);
-Thread *Thd;]]></code.declaration>
+THD_WORKING_AREA(waThreadX, 32);
+thread_t *Thd;]]></code.declaration>
       <code.init><![CDATA[/* INIT CODE */
 
 #ifndef __I2C_CONFIGURED
 #define __I2C_CONFIGURED
-palSetPadMode(GPIOB, 8, PAL_MODE_ALTERNATE(4) | PAL_STM32_PUDR_PULLUP| PAL_STM32_OTYPE_OPENDRAIN);// SCL
-palSetPadMode(GPIOB, 9, PAL_MODE_ALTERNATE(4) | PAL_STM32_PUDR_PULLUP| PAL_STM32_OTYPE_OPENDRAIN);// SDA
+palSetPadMode(GPIOB, 8, PAL_MODE_ALTERNATE(4) | PAL_MODE_INPUT_PULLUP| PAL_STM32_OTYPE_OPENDRAIN);// SCL
+palSetPadMode(GPIOB, 9, PAL_MODE_ALTERNATE(4) | PAL_MODE_INPUT_PULLUP| PAL_STM32_OTYPE_OPENDRAIN);// SDA
 
 static const I2CConfig i2cfg = {
     OPMODE_I2C,

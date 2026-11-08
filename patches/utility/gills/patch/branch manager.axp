@@ -196,7 +196,7 @@ FRESULT scan_files_for_patchbin(char* path, char* path_short) {
 msg_t ThreadX2() {
 	codec_clearbuffer();
 	scan_files_for_patchbin(p, p_short);
-	while (!chThdShouldTerminate()) {
+	while (!chThdShouldTerminateX()) {
 		chThdSleepMilliseconds(10);
 	}
 	chThdExit((msg_t)0);

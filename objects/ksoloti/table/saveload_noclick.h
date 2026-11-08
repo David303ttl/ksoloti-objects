@@ -1,7 +1,7 @@
 #ifndef SAVELOAD_NOCLICK_H
 #define SAVELOAD_NOCLICK_H
 
-static bool_t saveload_noclick_busy = false;
+static bool saveload_noclick_busy = false;
 
 void wait_busy(void) {
 	volatile uint32_t count = 600000; /* 10 minutes */

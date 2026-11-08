@@ -92,7 +92,7 @@ Too low a threshold will lead to flickering values, too high a threshold might c
 	int32_t smoothValue = 0;
 	int32_t errorEMA = 0;
 
-	bool_t isSleeping = false;
+	bool isSleeping = false;
 };
 
 

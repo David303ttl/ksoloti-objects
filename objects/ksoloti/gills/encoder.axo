@@ -34,8 +34,8 @@ When the &quot;set&quot; inlet changes, the value is set directly (good for sett
 int32_t encoder_val;
 int32_t set_last;
 
-bool_t b;
-bool_t b_last;
+bool b;
+bool b_last;
 
 uint8_t counter;]]></code.declaration>
       <code.init><![CDATA[/* Configure encoder pins as input */
