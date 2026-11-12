@@ -75,7 +75,7 @@ palSetPadMode(GPIOB, 3, PAL_MODE_ALTERNATE(6)); // SCK
 palSetPadMode(GPIOB, 4, PAL_MODE_ALTERNATE(6)); // MISO
 palSetPadMode(GPIOD, 6, PAL_MODE_ALTERNATE(5)); // MOSI - AF5 equals SPI3 here
 static const SPIConfig spi3cfg =
-    {NULL, GPIOA, 15, 0 attr_clock__polarity attr_clock__phase attr_baudrate attr_format};
+    {false, false, NULL, NULL, GPIOA, 15, 0 attr_clock__polarity attr_clock__phase attr_baudrate attr_format, 0};
 spiStart(&SPID3, &spi3cfg);
 ]]></code.init>
       <code.dispose><![CDATA[spiStop(&SPID3);

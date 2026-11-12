@@ -61,7 +61,7 @@ __attribute__((noinline)) msg_t ThreadNoClick2() {
 }
 
 
-static msg_t ThreadNoClick(void *arg) {
+static void ThreadNoClick(void *arg) {
     ((attr_parent *)arg)->ThreadNoClick2();
 }
 
@@ -70,7 +70,7 @@ THD_WORKING_AREA(waThreadNoClick, 1024); /* 750 is not enough, try 1024 or more 
 thread_t *Thd;]]></code.declaration>
       <code.init><![CDATA[trig_load = trig_save = ntrig = 0;
 
-Thd = chThdCreateStatic(waThreadNoClick, sizeof(waThreadNoClick), LOWPRIO, (tfunc_t)ThreadNoClick, (void *)this);]]></code.init>
+Thd = chThdCreateStatic(waThreadNoClick, sizeof(waThreadNoClick), LOWPRIO, ThreadNoClick, (void *)this);]]></code.init>
       <code.dispose><![CDATA[chThdTerminate( Thd );
 chThdWait( Thd );]]></code.dispose>
       <code.krate><![CDATA[trig_load = inlet_load;

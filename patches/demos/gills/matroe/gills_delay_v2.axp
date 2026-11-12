@@ -278,8 +278,8 @@ bool etrig;
 int32_t encoder_val = 0;
 int32_t set_last = 0;
 
-bool_t a = true;
-bool_t a_last = true;
+bool a = true;
+bool a_last = true;
 
 //averaging
 //averaging lengths:   
